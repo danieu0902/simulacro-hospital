@@ -39,7 +39,7 @@ export async function eliminarPlanta(formData) {
 //---------------------------pacientes----------------------------
 export async function insertarPaciente(formData) {
     const nombre = formData.get('nombre')
-    const fecha_nacimiento = formData.get('fecha_nacimiento')
+    const fecha_nacimiento = new Date(formData.get('fecha_nacimiento'))
     const plantaId = Number(formData.get('plantaId'))
     await prisma.paciente.create({
         data: {
@@ -53,11 +53,9 @@ export async function insertarPaciente(formData) {
 export async function modificarPaciente(formData) {
     const id = Number(formData.get('id'))
     const nombre = formData.get('nombre')
-    const fecha_nacimiento = formData.get('fecha_nacimiento')
+    const fecha_nacimiento = new Date(formData.get('fecha_nacimiento'))
     const plantaId = Number(formData.get('plantaId'))
-    if (isNaN(fecha_nacimiento)) {
-        throw new Error("El formato de 'fechaNacimiento' no es válido. Debe ser una fecha.");
-    }
+
     await prisma.paciente.update({
         where: {
             id
