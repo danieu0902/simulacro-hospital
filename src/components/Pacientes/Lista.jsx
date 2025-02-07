@@ -4,6 +4,7 @@ import Modal from "@/components/Modal";
 import PacienteInsertar from "./Insertar";
 import PacienteModificar from "./Modificar";
 import PacienteEliminar from "./Eliminar";
+import Link from "next/link";
 
 export default async function Pacientes() {
 
@@ -37,7 +38,7 @@ export default async function Pacientes() {
             </div>
             <p className="text-gray-600 italic mb-4">
               <span className="font-bold">Fecha de Nacimiento:</span>{" "}
-              {new Date(paciente.fechaNacimiento).toLocaleDateString()}
+              {new Date(paciente.fecha_nacimiento).toLocaleDateString()}
             </p>
             <p className="text-gray-700">Planta: {paciente.plantaId}</p>
           </li>
