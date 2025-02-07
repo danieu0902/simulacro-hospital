@@ -1,37 +1,46 @@
 //---------------------componente servidor---------------------
 import { obtenerPlantas } from "@/lib/data";
-// import Link from "next/link";
-// import Modal from "../modal";
-// import PlantaModificar from "./Modificar";
-// import PlantaEliminar from "./Eliminar";
-// import PlantaInsertar from "./Insertar";
+import Modal from "@/components/Modal";
+import PlantaInsertar from "./Insertar";
+import PlantaModificar from "./Modificar";
+import PlantaEliminar from "./Eliminar";
+import Link from "next/link";
+
 export default async function ListaPlantas() {
     const plantas = await obtenerPlantas();
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* <Modal texto="Insertar" className="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md cursor-pointer transition-colors duration-300 ease-in-out">
+        <div className="bg-gray-100 p-8 min-h-screen">
+            {/* Botón Insertar */}
+            <Modal openElement={<p className="inline-block text-white bg-blue-600 p-4 rounded-md cursor-pointer hover:bg-blue-700 transition mb-6">INSERTAR PLANTA</p>}>
                 <PlantaInsertar />
-            </Modal> */}
-            {
-                plantas.map(planta =>
-                    <li key={planta.id} className="bg-white shadow-md rounded p-4">
-                        <div className="flex flex-col items-start space-y-2">
-                            <p className="text-2xl font-semibold">Nombre: <span className="font-normal">{planta.nombre}</span></p>
-                            <p className="text-lg font-semibold">Jefe de planta: <span className="font-normal">{planta.jefe_planta}</span></p>
-                        </div>
-                        <div>
-                            {/* <Link href={`/plantas/${planta.id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ver</Link> */}
-{/* 
-                            <Modal texto="Eliminar" className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md cursor-pointer transition-colors duration-300 ease-in-out">
-                               <PlantaEliminar planta={planta}/>
-                            </Modal>
-                            <Modal texto="Modificar" className="bg-yellow-500 hover:bg-yellow-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md cursor-pointer transition-colors duration-300 ease-in-out">
-                               <PlantaModificar planta={planta}/>
-                            </Modal> */}
-                        </div>
-                    </li>
-                )
-            }
-        </div>
-    );
-}
+            </Modal>
+            <ul className="flex flex-col items-center justify-center mt-10 space-y-4">
+                  {plantas.map((planta) => (
+                      <li key={planta.id} className="bg-white rounded-lg p-6 shadow-lg mb-4 w-full md:w-1/2 lg:w-1/3 transition-all hover:scale-105 hover:shadow-xl">
+                          <div className="flex justify-between items-center">
+                              <h2 className="text-2xl font-semibold mb-2 text-gray-900">
+                                  <Link href={`/plantas/${planta.id}`} className="hover:text-blue-600 hover:underline">
+                                      {planta.nombre}
+                                  </Link>
+                              </h2>
+                              
+                             
+                              <div className="flex space-x-2">
+                                  {/* Botón Modificar */}
+                                  <Modal openElement={<p className="inline-block text-white bg-yellow-500 p-2 rounded-md cursor-pointer hover:bg-yellow-600 transition">Modificar</p>}>
+                                      <PlantaModificar planta={planta} />
+                                  </Modal>
+                                  {/* Botón Eliminar */}
+                                  <Modal openElement={<p className="inline-block text-white bg-red-600 p-2 rounded-md cursor-pointer hover:bg-red-700 transition">Eliminar</p>}>
+                                      <PlantaEliminar planta={planta} />
+                                  </Modal>
+                              </div>
+                          </div>
+                          
+                          <p className="text-gray-600 italic mb-4">{planta.jefePlanta}</p>
+                      </li>
+                  ))}
+              </ul>
+          </div>
+      );
+  }

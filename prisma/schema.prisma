@@ -29,7 +29,6 @@ model Paciente {
   id          Int          @id @default(autoincrement())
   nombre      String
   fecha_nacimiento  DateTime
-  edad        Int
   plantaId    Int?
   planta      Planta?       @relation(fields: [plantaId], references: [id])
   medicinas   Medicina[]

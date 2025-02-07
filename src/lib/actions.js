@@ -40,14 +40,16 @@ export async function eliminarPlanta(formData) {
 export async function insertarPaciente(formData) {
     const nombre = formData.get('nombre')
     const fecha_nacimiento = new Date(formData.get('fecha_nacimiento'))
-    const plantaId = Number(formData.get('plantaId'))
+
+    const plantaId = Number(formData.get('plantaId')) 
+   
     await prisma.paciente.create({
         data: {
             nombre: nombre,
             fecha_nacimiento: fecha_nacimiento,
             plantaId: plantaId,
-        },
-    });
+        }
+    })
     revalidatePath('/pacientes')
 }
 export async function modificarPaciente(formData) {
