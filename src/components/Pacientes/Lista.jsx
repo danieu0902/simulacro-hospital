@@ -17,7 +17,9 @@ export default async function ListaPacientes() {
                     <li key={paciente.id} className="bg-white shadow-md rounded p-4">
                         <div className="flex flex-col items-start space-y-2">
                             <p className="text-2xl font-semibold">Nombre: <span className="font-normal">{paciente.nombre}</span></p>
-                            <p className="text-lg font-semibold">Vía de administración: <span className="font-normal">{paciente.via}</span></p>
+                            <p className="text-gray-600 text-center">{new Date(paciente.fechaNacimiento).toISOString().split('T')[0]}</p>
+                            <p className="text-lg font-semibold">Id de la planta: <span className="font-normal">{paciente.plantaId}</span></p>
+                            {/* <p className="text-lg font-semibold">Vía de administración: <span className="font-normal">{paciente.via}</span></p> */}
                         </div>
                         <div>
                             {/* <Link href={`/pacientes/${paciente.id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ver</Link> */}
